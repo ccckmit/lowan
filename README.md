@@ -30,6 +30,20 @@ We hope the project may help the widespreading of Lojban, and let more people kn
 > cd kb
 > node buildKB.js
 
+建構出來的字典格式如下：
+
+```javascript
+{
+"a":"and/or",
+"a":"or",
+"a":"sumti or",
+"a'a":"attentive",
+"a'acu'i":"inattentive",
+"a'anai":"avoiding",
+"a'au":"attitudal: moved",
+...
+```
+
 ## MT 翻譯系統
 
 在 /mt/ 資料夾中存放有邏輯語的翻譯系統，目前已經建構好(邏翻英) 的部分，等到成熟一點再開始考慮 (邏翻中) 的部分。
