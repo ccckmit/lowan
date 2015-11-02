@@ -1,4 +1,4 @@
-# Lowan -- (邏輯萬國語)
+# Lowan -- 邏輯萬國語
 
 Lowan is a project for the Lojban artificial language.
 
@@ -62,6 +62,14 @@ We hope the project may help the widespreading of Lojban, and let more people kn
 $ node parser "mi klama vi vu"
 
 ["text",["text_1",["paragraphs",["paragraph",["statement",["statement_1",["statement_2",["statement_3",["sentence",[["terms",["terms_1",["terms_2",["term",["term_1",["sumti",["sumti_1",["sumti_2",["sumti_3",["sumti_4",["sumti_5",["sumti_6",["KOhA_clause",[["KOhA","mi"]]]]]]]]]]]]]]]],["bridi_tail",["bridi_tail_1",["bridi_tail_2",["bridi_tail_3",["selbri",["selbri_1",["selbri_2",["selbri_3",["selbri_4",["selbri_5",["selbri_6",["tanru_unit",["tanru_unit_1",["tanru_unit_2",["BRIVLA_clause",[["BRIVLA",["gismu","klama"]]]]]]]]]]]]]],["tail_terms",["terms",["terms_1",["terms_2",["term",["term_1",["tag",["tense_modal",["simple_tense_modal",[["space",["VA_clause",["VA","vi"]]]]]]]]]]],["terms_1",["terms_2",["term",["term_1",["tag",["tense_modal",["simple_tense_modal",[["space",["VA_clause",["VA","vu"]]]]]]]]]]]]]]]]]]]]]]]]]]
+
+$node parser "mi klama klama mi vu le"
+
+camxes.js:55208
+        throw new this.SyntaxError(
+        ^
+SyntaxError: Expected end of input but "l" found.
+
 ```
 
 ## 展望
