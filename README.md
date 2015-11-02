@@ -59,17 +59,24 @@ We hope the project may help the widespreading of Lojban, and let more people kn
 以下範例是我們用 parser 剖析輸入行中的語句 "mi klama vi vu" 所得到的結果。
 
 ```
-$ node parser "mi klama vi vu"
+D:\Dropbox\cccwd\web\lowan\parser>node parser "mi klama klama mi vu"
+{"tree":["text",["text_1",["paragraphs",["paragraph",["statement",["statement_1"
+,["statement_2",["statement_3",["sentence",[["terms",["terms_1",["terms_2",["ter
+m",["term_1",["sumti",["sumti_1",["sumti_2",["sumti_3",["sumti_4",["sumti_5",["s
+umti_6",["KOhA_clause",[["KOhA","mi"]]]]]]]]]]]]]]]],["bridi_tail",["bridi_tail_
+1",["bridi_tail_2",["bridi_tail_3",["selbri",["selbri_1",["selbri_2",["selbri_3"
+,["selbri_4",["selbri_5",["selbri_6",["tanru_unit",["tanru_unit_1",["tanru_unit_
+2",["BRIVLA_clause",[["BRIVLA",["gismu","klama"]]]]]]]]]],["selbri_4",["selbri_5
+",["selbri_6",["tanru_unit",["tanru_unit_1",["tanru_unit_2",["BRIVLA_clause",[["
+BRIVLA",["gismu","klama"]]]]]]]]]]]]]],["tail_terms",["terms",["terms_1",["terms
+_2",["term",["term_1",["sumti",["sumti_1",["sumti_2",["sumti_3",["sumti_4",["sum
+ti_5",["sumti_6",["KOhA_clause",[["KOhA","mi"]]]]]]]]]]]]]],["terms_1",["terms_2
+",["term",["term_1",["tag",["tense_modal",["simple_tense_modal",[["space",["VA_c
+lause",["VA","vu"]]]]]]]]]]]]]]]]]]]]]]]]]]}
 
-["text",["text_1",["paragraphs",["paragraph",["statement",["statement_1",["statement_2",["statement_3",["sentence",[["terms",["terms_1",["terms_2",["term",["term_1",["sumti",["sumti_1",["sumti_2",["sumti_3",["sumti_4",["sumti_5",["sumti_6",["KOhA_clause",[["KOhA","mi"]]]]]]]]]]]]]]]],["bridi_tail",["bridi_tail_1",["bridi_tail_2",["bridi_tail_3",["selbri",["selbri_1",["selbri_2",["selbri_3",["selbri_4",["selbri_5",["selbri_6",["tanru_unit",["tanru_unit_1",["tanru_unit_2",["BRIVLA_clause",[["BRIVLA",["gismu","klama"]]]]]]]]]]]]]],["tail_terms",["terms",["terms_1",["terms_2",["term",["term_1",["tag",["tense_modal",["simple_tense_modal",[["space",["VA_clause",["VA","vi"]]]]]]]]]]],["terms_1",["terms_2",["term",["term_1",["tag",["tense_modal",["simple_tense_modal",[["space",["VA_clause",["VA","vu"]]]]]]]]]]]]]]]]]]]]]]]]]]
-
-$node parser "mi klama klama mi vu le"
-
-camxes.js:55208
-        throw new this.SyntaxError(
-        ^
-SyntaxError: Expected end of input but "l" found.
-
+D:\Dropbox\cccwd\web\lowan\parser>node parser "mi klama klama mi vu le"
+{"error":{"name":"SyntaxError","expected":[],"found":"l","message":"Expected end
+ of input but \"l\" found.","offset":21,"line":1,"column":22}}
 ```
 
 ## 展望
