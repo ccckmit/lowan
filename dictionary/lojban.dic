@@ -1,0 +1,186 @@
+// 待處理語法
+//   Xdjed=星期X
+//   Xmast=X月
+//   Xcac.=X點鐘 // “四点钟”就是la vocac.
+//   數字
+
+
+// 代名詞
+mi=我
+do=你
+ti=這裏
+ta=那裏
+tu=娜裏
+mi'ai=我們
+
+// 時態詞
+pu=現在|正
+ka=過去|已
+ba=未來|將
+
+// 單稱詞
+la=那
+le=類
+lo=位
+li=粒 // (la用於cmene，le用於gismu，li用於數字，lo謂詞轉為名詞填充)
+
+// 指稱詞：
+la'e=那的
+le'e=類的
+lo'e=位的
+
+// 群稱詞： 
+lai=那群
+lei=類群 // = lu'o le
+loi=位群 // = lu'o lo
+
+// 組稱詞： 
+la'i=那組
+le'i=類組
+lo'i=位組
+
+// 組合詞： 
+lu'o=組合|合
+lu'a=解散|散
+
+// 填充格：
+fa=壹
+fe=貳
+fi=參
+fo=肆
+fu=伍
+zo'e=啾
+
+// 區分詞： 
+cu=素 // 它本身沒有任何含義，但是可以把selbri和前面的單詞區分開來。
+
+// 時間詞： 
+djedi=天
+masti=月
+vensa=春
+crisa=夏
+critu=秋
+dunra=冬
+
+// 疑問詞： 
+xu=疑|是否
+ma=嘛
+mo=麼
+xo=幾|多少 // (xu用於YES/No 問句, ma用於填充當 cmene, mo用於填充當 gismu, xo=問數字)
+
+// 關係詞： 
+pe=配 
+po=部 
+po'e=部的 
+ti'u=時的 // (發生在……的時間) (pe:屬於 po:唯一屬於 )
+
+// 命令詞： 
+ko=令|命令 
+.e'o=請 
+
+// 回答詞： 
+go'i=同意|然|是的
+na=非|不|否
+
+// 數字詞： 
+pa=1|１
+re=2|２
+ci=3|３
+vo=4|４
+mu=5|５
+xa=6|６
+ze=7|７
+bi=8|８
+so=9|９
+no=0|０
+dau=10|１０
+fei=11|１１
+gai=12|１２
+jau=13|１３
+rei=14|１４
+vai=15|１５
+ki'o=千
+pi=點
+
+// 部分詞： 
+no=0|沒有
+ro=每個|每
+du'e=太多
+so'a=幾乎所有
+so'e=大多數
+so'i=許多
+so'o=若干
+so'u=少許
+su'e=至多
+su'o=至少
+
+// 人類詞： 
+prenu=人 
+ninmu=女人 
+sonci=戰士
+
+// 動物詞： 
+gerku=狗 
+mlatu=貓 
+cipni=鳥
+
+// 動作詞： 
+pinxe=喝 
+dunda=給 
+cinba=吻|親吻
+cusku=說
+
+// 顏色詞： 
+blanu=藍色 
+crino=綠色
+
+// 物品詞： 
+plise=蘋果 
+cukta=書
+
+// 動作詞： 
+klama=去 
+marce=車 
+bajra=跑 
+viska=看到
+
+// 人際詞： 
+nelci=喜歡 
+prami=愛|愛慕
+pendo=朋友|友 
+xebni=恨|怨恨
+fengu=生氣|怒
+
+// 話語詞： 
+tcica=騙
+
+// 親屬詞： 
+rirni=父母 
+tamne=表兄 
+
+// 從屬詞： 
+nenri=內部 
+cmima=成員
+
+// 形容詞： 
+blabi=白 
+barda=大
+
+// 器官詞： 
+birka=手臂 
+
+// 學習詞： 
+slabu=熟練
+
+// 邏輯語： 
+gismu=根詞 
+
+// 招呼詞： 
+coi=嗨
+
+// 表情詞： 
+cmila=笑 
+
+// 國家詞： 
+merko=美國人
+jungo=中國人
