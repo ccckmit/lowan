@@ -49,7 +49,7 @@ if (argv.indexOf("-f")>=0) {
 
 console.log("ltext=%s", ltext);
 
-var p=parse(ltext);
+var p=parse(ltext); // parse 的動作確實很慢，北風與太陽的故事要 parse 五秒鐘，很難接受阿！
 var tree;
 if (argv.indexOf("-s")>=0 && typeof p.tree !== 'undefined')
   tree = simplify(p.tree);
@@ -63,3 +63,6 @@ if (argv.indexOf("-pretty")>=0)
   console.log("tree=%s", JSON.stringify(tree, null, 2));
 else
   console.log("tree=%j", tree);
+
+
+

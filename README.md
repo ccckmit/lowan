@@ -54,7 +54,7 @@ We hope the project may help the widespreading of Lojban, and let more people kn
 
 ## parser 剖析器 (採用 camxes.js)
 
-在 /parser/ 資料夾中有 parser.js ，是我們將 lojban 官網中推薦的 camxes.js 程式轉成 node.js 模組後，用來進行剖析 (parsing) 的程式。
+在 /parser/ 資料夾中有 parser.js ，是我們將 lojban 官網中推薦的 [camxes.js](http://masatohagiwara.net/camxes.js/) 程式轉成 node.js 模組後，用來進行剖析 (parsing) 的程式。
 
 parser.js 的用法如下：
 
@@ -116,6 +116,14 @@ tree=[
   ]
 ]
 ```
+
+很可惜的是，camxes.js 非常慢，用來 parse 的速度超慢，光是一個北風與太陽的 200 字小故事，竟然要花五秒鐘。
+
+我們應該會將 [camxes.js.peg](https://github.com/mhagiwara/camxes.js/blob/master/camxes.js.peg) 改寫為 BNF，然後用 [jyson](https://zaach.github.io/jison/docs/) 來產生新的 parser。
+
+這裡居然有邏輯語的 yacc 語法，這樣就可以很容易的餵給 jyson 產生 parser 了。
+
+* <http://www.lojban.org/publications/formal-grammars/grammar.300.txt>
 
 ## 展望
 
