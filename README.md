@@ -27,8 +27,8 @@ We hope the project may help the widespreading of Lojban, and let more people kn
 
 您可以用下列指令建構這些 JSON 字典。
 
-> cd kb
-> node buildKB.js
+    cd kb
+    node buildKB.js
 
 建構出來的字典格式如下：
 
@@ -128,5 +128,3 @@ tree=[
 ## 展望
 
 目前其他部分尚未完成，專案還在進行當中 ....
-
-
