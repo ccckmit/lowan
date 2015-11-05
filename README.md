@@ -23,12 +23,25 @@ We hope the project may help the widespreading of Lojban, and let more people kn
 
 在邏輯語官方網站中有 [各國語言對邏輯語的翻譯字典檔](http://jbovlaste.lojban.org/export/xml.html) 。
 
-我們運用程式 /kb/buildKB.js 將這些字典轉換成 JSON 格式，像是 l2e.json (邏翻英), l2c.json (邏翻中), e2l.json (英翻邏) 等字典，以便讓後續的程式可以方便的處理。 (注意 e2c.json 並非 lojban 官網的字典，而是我們用維基百科某詞頻表加上 google 翻譯所做出來的)。
+我們下載了其中的英文和中文版本，分別儲存在 <dictionary/xml-export_english.html> 與 <dictionary/xml-export_chinese.html> 底下。
+
+為了讓後續的程式能很方便的使用這些字典資源，我們寫了一個 <kb/kbBuild.js> 的程式，用來將這些資源整理成比較好用的 JSON 格式知識庫。
+
+我們撰寫了一個稱為 xml2json() 的函數，可以將 XML 字典中的翻譯表抽出，並轉換成 JSON 格式儲存，於是我們只要撰寫下列兩行程式，就可以分別將英文與中文字典轉換成 JSON 儲存。
+
+```javascript
+xml2json("../dictionary/xml-export_english.html", "e2l.json", "l2e.json");
+xml2json("../dictionary/xml-export_chinese.html", "c2l.json", "l2c.json");
+```
+
+若您使用 JavaScript 撰寫程式，您只要用 JSON.parse("e2l.json") 這樣的指令就能將字典載入並使用。
+
+目前轉換出來的字典共有四個檔案，分別是 <kb/l2e.json> (邏翻英), <kb/l2c.json> (邏翻中), <kb/e2l.json> (英翻邏) , <kb/c2l.json> (中翻邏) 等，其中英文版的字很多，但是中文版的字就很少，因此建議使用英文版為主。
 
 您可以用下列指令建構這些 JSON 字典。
 
 > cd kb
-> node buildKB.js
+> node kbBuild.js
 
 建構出來的字典格式如下：
 
@@ -43,6 +56,8 @@ We hope the project may help the widespreading of Lojban, and let more people kn
 "a'au":"attitudal: moved",
 ...
 ```
+
+另外、我們還下載了一個維基百科某詞頻表，並用 google 翻譯翻成了中英對照的模式，儲存在 <kb/e2c.json> 這個檔案中，讓我們可以透過「邏翻英+英翻中」的方式，間接地完成「邏翻中」的功能。
 
 ## MT 翻譯系統
 
