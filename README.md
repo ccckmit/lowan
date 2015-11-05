@@ -23,7 +23,7 @@ We hope the project may help the widespreading of Lojban, and let more people kn
 
 在邏輯語官方網站中有 [各國語言對邏輯語的翻譯字典檔](http://jbovlaste.lojban.org/export/xml.html) 。
 
-我們下載了其中的英文和中文版本，分別儲存在 [dictionary/xml-export_english.html] 與 <dictionary/xml-export_chinese.html> 底下。
+我們下載了其中的英文和中文版本，分別儲存在 [dictionary/xml-export_english.html](dictionary/xml-export_english.html) 與 <dictionary/xml-export_chinese.html> 底下。
 
 為了讓後續的程式能很方便的使用這些字典資源，我們寫了一個 <kb/kbBuild.js> 的程式，用來將這些資源整理成比較好用的 JSON 格式知識庫。
 
