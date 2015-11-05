@@ -134,14 +134,12 @@ tree=[
 
 很可惜的是，camxes.js 非常慢，用來 parse 的速度超慢，光是一個北風與太陽的 200 字小故事，竟然要花五秒鐘。
 
-我們應該會將 [camxes.js.peg](https://github.com/mhagiwara/camxes.js/blob/master/camxes.js.peg) 改寫為 BNF，然後用 [jyson](https://zaach.github.io/jison/docs/) 來產生新的 parser。
+我們應該會將 [camxes.js.peg](https://github.com/mhagiwara/camxes.js/blob/master/camxes.js.peg) 改寫為 BNF，然後用 [jison](https://zaach.github.io/jison/docs/) 來產生新的 parser。
 
-這裡居然有邏輯語的 yacc 語法，這樣就可以很容易的餵給 jyson 產生 parser 了。
+這裡居然有邏輯語的 yacc 語法，這樣就可以很容易的餵給 jison 產生 parser 了。
 
 * <http://www.lojban.org/publications/formal-grammars/grammar.300.txt>
 
 ## 展望
 
 目前其他部分尚未完成，專案還在進行當中 ....
-
-
