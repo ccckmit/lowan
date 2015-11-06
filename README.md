@@ -40,8 +40,10 @@ xml2json("../dictionary/xml-export_chinese.html", "c2l.json", "l2c.json");
 
 您可以用下列指令建構這些 JSON 字典。
 
-> cd kb
-> node kbBuild.js
+```
+$ cd kb
+$ node kbBuild.js
+```
 
 建構出來的字典格式如下：
 
