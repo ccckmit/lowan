@@ -25,6 +25,8 @@ We hope the project may help the widespreading of Lojban, and let more people kn
 
 我們下載了其中的英文和中文版本，分別儲存在 [dictionary/xml-export_english.html](dictionary/xml-export_english.html) 與 [dictionary/xml-export_chinese.html](dictionary/xml-export_chinese.html) 底下。
 
+有關字典的進一步內容，請參考 [邏輯語的 XML 字典結構](kb/README.md) 。
+
 為了讓後續的程式能很方便的使用這些字典資源，我們寫了一個 [kb/kbBuild.js](kb/kbBuild.js) 的程式，用來將這些資源整理成比較好用的 JSON 格式知識庫。
 
 我們撰寫了一個稱為 xml2json() 的函數，可以將 XML 字典中的翻譯表抽出，並轉換成 JSON 格式儲存，於是我們只要撰寫下列兩行程式，就可以分別將英文與中文字典轉換成 JSON 儲存。
@@ -60,8 +62,6 @@ $ node kbBuild.js
 ```
 
 另外、我們還下載了一個維基百科某詞頻表，並用 google 翻譯翻成了中英對照的模式，儲存在 [kb/e2c.json](kb/e2c.json) 這個檔案中，讓我們可以透過「邏翻英+英翻中」的方式，間接地完成「邏翻中」的功能。
-
-有關 kb 的進一步內容，請參考 [邏輯語的知識庫 KB](kb/README.md)
 
 ## MT 翻譯系統
 
