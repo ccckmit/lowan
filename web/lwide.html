@@ -1,13 +1,12 @@
 <!-- firefox 似乎不支援 ruby tag : http://www.w3schools.com/tags/tag_ruby.asp -->
 <html>
 <head>
-<meta charset="utf-8" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="favicon.ico">
-  <!-- Bootstrap -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom styles for this template -->
-  <link href="elearn.css" rel="stylesheet">
-  <title>邏輯萬國語翻譯系統</title>
+  <link href="main.css" rel="stylesheet">
+  <title>Lowan</title>
 </head>
 <body onload="load()">
 
@@ -20,100 +19,91 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#" style="color:#cccc33;font-family:標楷體">邏輯萬國語翻譯系統</a>
+          <a class="navbar-brand" href="#" style="color:#cccc33">Lowan (Lojban IDE)</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
+<!--          
             <li class="dropdown">
-              <a id="dictname" class="dropdown-toggle" data-toggle="dropdown">字典<span class="caret"></span></a>
+              <a id="dictname" class="dropdown-toggle" data-toggle="dropdown">English<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a onclick="switchDict('e2l')">英翻邏</a></li>
-                <li><a onclick="switchDict('l2e')">邏翻英</a></li>
-                <li><a onclick="switchDict('e2c')">英翻中</a></li>
+                <li><a onclick="switchDict('e2l')">English</a></li>
+                <li><a onclick="switchDict('c2l')">Chinese</a></li>
               </ul>
             </li>
-            <li id="tabMT" class="tab"><a href="#MT" onclick="switchPanel('MT')">翻譯</a></li>
-            <li id="tabHelp" class="tab"><a href="#Help" onclick="switchPanel('Help')">說明</a></li>
+-->            
+            <li id="tabHelp" class="tab"><a href="#Help" onclick="switchPanel('Help')">About</a></li>
           </ul>
         </div>
       </div>
     </nav>
-
-
-    <!-- Begin page content : 英翻中 -->
     <div id="panelMT" class="container panel">
-      <p class="lead">
         <form name="formMT" class="lead">
           <div class="row" style="height:300px">
             <div class="col-md-6">
               <div class="page-header">
-                <span>原文</span>
-<!--                
-                <input type="text" id="query" equired autofocus data-mt="Query" placeholder="" size="12"/> 
-                <button class="btn btn-primary" type="button" data-mt="Query">查詢</button>
--->                
-                <input type="button" value="翻譯" onclick="doMT()" class="btn btn-primary" style="float:right"/>
+                <div class="dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" id="language1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    English
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href="#">English</a></li>
+                    <li><a href="#">中文</a></li>
+                  </ul>
+                </div>
               </div>
-              <textarea id="xbox" class="form-control" style="height:100%"></textarea>
+              <textarea id="xbox" class="form-control" style="height:100%">mi =read lo =book</textarea>
             </div>
             <div class="col-md-6">
               <div class="page-header">
-                <span>翻譯結果</span>
-<!--                
-                <input type="text" id="queryResult" equired autofocus data-mt="queryResult" placeholder="" size="15"/>
-                <button class="btn btn-primary" type="button" data-mt="Save">儲存</button>
--->                
-                <button class="btn btn-primary" type="button" data-mt="Forget" onclick="forget()" style="float:right">忘記已知詞</button>
+                <div class="dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" id="language2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Lojban
+                    <span class="caret"></span>
+                  </button>
+                </div>
               </div>
-              <div id="ybox" style="width:100%; height:100%; border:1px dotted #888; overflow:auto;" class="form-control"></div>
+              <div id="ybox" style="width:100%; height:100%; border:1px dotted #888; overflow:auto;" class="form-control" contenteditable></div>
             </div>
             <div></div>
           </div> <!-- row -->
         </form>
-      </p>
     </div>
-
-    <!-- Begin page content : 說明 -->
     <div id="panelHelp" class="container panel">
-      <div class="page-header"><h1>說明</h1></div>
+      <div class="page-header"><h1>About</h1></div>
       <p class="lead">
-        本網頁為 lowan 邏輯萬國語計畫的翻譯系統<br/><br/>
-        專案在 github 網址為： <a href="https://github.com/ccckmit/lowan">https://github.com/ccckmit/lowan</a><br/>
+        Lowan is a IDE like writing system for Lojban<br/><br/>
+        Source at github -- <a href="https://github.com/ccckmit/lowan">https://github.com/ccckmit/lowan</a><br/>
       </p>
     </div>
-    <!-- footer -->
+    <div id="candidates" class="well well-sm" style="overflow:auto"></div>
+<!--    
     <footer class="footer">
       <div class="container">
-        <p id="objNow" class="text-muted">
-klama : $x_1$ 移动到目的地 $x_2$, 从$x_3$出发, 经过路径$x_4$ ,使用方法/交通工具 $x_5$.
-        </p>
+        <p id="candidates" class="text-muted"></p>
       </div>
     </footer>    
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+-->    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bootstrap-filestyle.min.js"></script>
     <script src="spa.js"></script>
-<!--    
-    <script src="e2c.js"></script>
-    <script src="l2e.js"></script>
-    <script src="e2l.js"></script>
-    <script src="l2eGismu.js"></script>
--->
     <script src="l2e.hit.js"></script>
     <script src="l2e.obj.js"></script>    
+    <script src="l2c.hit.js"></script>
+    <script src="l2c.obj.js"></script>    
 <script>
-var xbox, ybox, dictHit, dictKnown, dictObj;
-var dictHitMap  = { e2l:{}, l2e:l2eHit, e2c:{} };
-var dictKnownMap= { e2l:{}, l2e:{},     e2c:{} };
-var dictObjMap  = { e2l:{}, l2e:l2eObj, e2c:{} };
+var xbox, ybox, dictHit, dictKnown, dictObj, lDictHit=l2eHit, lDictObj=l2eObj;
+var dictHitMap  = { e2l:{}, c2l:{}, l2e:l2eHit, l2c:l2cHit };
+var dictKnownMap= { e2l:{}, c2l:{}, l2e:{},     l2c:{} };
+var dictObjMap  = { e2l:{}, c2l:{}, l2e:l2eObj, l2c:l2cObj };
 
 function load() {
   dictHitMap.e2l = hitReverse(dictHitMap.l2e);
   dictObjMap.e2l = hitJoin(dictHitMap.l2e, dictObjMap.l2e);
-  
+  dictHitMap.c2l = hitReverse(dictHitMap.l2c);
+  dictObjMap.c2l = hitJoin(dictHitMap.l2c, dictObjMap.l2c);
   xbox   = document.getElementById("xbox");
   ybox   = document.getElementById("ybox");
   switchPanel("MT");
@@ -121,6 +111,9 @@ function load() {
   var dbDictKnown = DB.load('dictKnown');
   if (dbDictKnown !== undefined)
     dictKnown = dbDictKnown;
+  $("#xbox").bind("keyup click focus", function() {
+    cursorMove(this);
+  });
 }
 
 function forget() {
@@ -175,7 +168,7 @@ function normalize(e) {
   return e.replace("'", '_').toLowerCase();
 }
 
-var objNow = "";
+// var candidates = "";
 
 function mt(text) {
   var toText = "";
@@ -190,37 +183,76 @@ function mt(text) {
   return toText;
 }
 
+function markup(y, yi) {
+  var i=0;
+  if (yi.length > 0) {
+    i = Math.max(parseInt(yi)-1, 0);
+  }
+  if (typeof y !== 'undefined')
+    return "("+y[i]+")";
+  else
+    return "()";
+}
+
 function line_mt(str) { // x2y : translate from x language into y language
-  var re = /([\w']+)/gi, m;  
+  str = " "+str;
+  var re = /\s(=([^\d\s]+)(\d*))/gi, m;  
   var toStr = "";
   var si = 0;
   while (m = re.exec(str)) {
-    var x = m[1], xlower=x.toLowerCase();
-    var y = dictHit[xlower];
-    if (dictObj[xlower] !== null) {
-      objNow = JSON.stringify(dictObj[xlower]);
-    }
-    toStr += str.substring(si, re.lastIndex-x.length);
-    if (y === undefined || dictKnown[xlower] !== undefined)
-      y = dictKnown[xlower];
-    toStr += '<ruby class="'+normalize(x)+'"><rb>'+x+'</rb><rt>'+y+'</rt></ruby>';
+    var ex=m[1], x = m[2], yi=m[3];
+//    console.log("m[0]=", m[0], "m[1]=", m[1]);
+    var lx=x.toLowerCase();
+    var y = dictHit[x];
+    toStr += str.substring(si, re.lastIndex-ex.length);
+    toStr += '<ruby class="'+normalize(ex)+'"><rb>'+ex+'</rb><rt>'+markup(y, yi)+'</rt></ruby>';
     si = re.lastIndex;
   }
   return toStr;
 }
 
+function array2html(array) {
+  var str="<ol>";
+  for (var i in array) {
+    str += "<li>"+JSON.stringify(array[i])+"</li>";
+  }
+  return str+"</ol>";
+}
+
 function doMT() {
   var cstr = mt(xbox.value);
-  $('#objNow').html(objNow);
   ybox.innerHTML = cstr.replace(/\n/g, "<BR/>");
-  $('ruby').click(function() {
-    var e = $(this).find('rb').text().toLowerCase();
-    var c = $(this).find('rt').text();
-    dictKnown[e] = c;
-    $('#query').val(e);
-    $('#queryResult').val(e+'='+c);
-    $('.'+normalize(e)).find('rt').hide();
-  });
+}
+
+function cursorMove(element) {
+  var el = $(element).get(0);
+  var pos = el.selectionStart;
+  var text = " "+xbox.value;
+  for (var i=pos+1; i>0; i--) {
+    if (/[\s]/.test(text[i])) {
+      i--;
+      break;
+    }
+  }
+  i = Math.max(i,0);
+  var m = text.substring(i).match(/(([=\s])([^=\d\s]+)(\d*))/);
+  if (m !== null) {
+    var op=m[2], x = m[3], lx=x.toLowerCase();
+    console.log('pos='+pos+' x='+x);
+    var candidates = null;
+    if (op === '=') {
+      candidates = dictObj[lx];
+    } else {
+      candidates = lDictObj[lx];
+    }
+    if (!(candidates instanceof Array)) {
+      if (typeof candidates !== "undefined")
+        candidates = [ candidates ];
+    }
+    var candidatesHtml = array2html(candidates);
+    $('#candidates').html(candidatesHtml);
+  }
+  return pos;
 }
 
 $('#xbox').keyup(doMT);
