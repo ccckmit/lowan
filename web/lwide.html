@@ -23,37 +23,39 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-<!--          
-            <li class="dropdown">
-              <a id="dictname" class="dropdown-toggle" data-toggle="dropdown">English<span class="caret"></span></a>
+            <li class="dropdown">        
+              <a id="dictname" class="dropdown-toggle" data-toggle="dropdown">Panel<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a onclick="switchDict('e2l')">English</a></li>
-                <li><a onclick="switchDict('c2l')">Chinese</a></li>
+                <li><a onclick="switchPanel('Help')">About</a></li>
+                <li><a onclick="switchPanel('MT')">MT</a></li>
               </ul>
             </li>
--->            
+          </ul>
+<!--          
+          <ul class="nav navbar-nav navbar-right">
             <li id="tabHelp" class="tab"><a href="#Help" onclick="switchPanel('Help')">About</a></li>
           </ul>
+-->          
         </div>
       </div>
     </nav>
-    <div id="panelMT" class="container panel">
+    <div id="panelMT" class="container panel" style="display:none;">
         <form name="formMT" class="lead">
           <div class="row" style="height:300px">
             <div class="col-md-6">
               <div class="page-header">
                 <div class="dropdown">
-                  <button class="btn btn-default dropdown-toggle" type="button" id="language1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    English
+                  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span id="language1">English</span>
                     <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li><a href="#">English</a></li>
-                    <li><a href="#">中文</a></li>
+                    <li><a href="JavaScript:switchDict('e2l')">English</a></li>
+                    <li><a href="JavaScript:switchDict('c2l')">中文</a></li>
                   </ul>
                 </div>
               </div>
-              <textarea id="xbox" class="form-control" style="height:100%">mi =read lo =book</textarea>
+              <textarea id="xbox" class="form-control" style="height:100%">mi =come la =Beijing la =Taipei zo'e le =airplane</textarea>
             </div>
             <div class="col-md-6">
               <div class="page-header">
@@ -70,21 +72,17 @@
           </div> <!-- row -->
         </form>
     </div>
-    <div id="panelHelp" class="container panel">
-      <div class="page-header"><h1>About</h1></div>
-      <p class="lead">
+    <div id="panelHelp" class="container panel" style="display:none;">
+      <center>
+        <div class="page-header"><h1>About</h1></div>
+        <br/><img id="waitIcon" src="wait.gif"/><br/>
+        <p class="lead">
         Lowan is a IDE like writing system for Lojban<br/><br/>
         Source at github -- <a href="https://github.com/ccckmit/lowan">https://github.com/ccckmit/lowan</a><br/>
-      </p>
+        </p>
+      </center>
     </div>
     <div id="candidates" class="well well-sm" style="overflow:auto"></div>
-<!--    
-    <footer class="footer">
-      <div class="container">
-        <p id="candidates" class="text-muted"></p>
-      </div>
-    </footer>    
--->    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="bootstrap-filestyle.min.js"></script>
@@ -99,6 +97,8 @@ var dictHitMap  = { e2l:{}, c2l:{}, l2e:l2eHit, l2c:l2cHit };
 var dictKnownMap= { e2l:{}, c2l:{}, l2e:{},     l2c:{} };
 var dictObjMap  = { e2l:{}, c2l:{}, l2e:l2eObj, l2c:l2cObj };
 
+switchPanel("Help");
+
 function load() {
   dictHitMap.e2l = hitReverse(dictHitMap.l2e);
   dictObjMap.e2l = hitJoin(dictHitMap.l2e, dictObjMap.l2e);
@@ -106,14 +106,17 @@ function load() {
   dictObjMap.c2l = hitJoin(dictHitMap.l2c, dictObjMap.l2c);
   xbox   = document.getElementById("xbox");
   ybox   = document.getElementById("ybox");
-  switchPanel("MT");
   switchDict('e2l');
+  $('#waitIcon').hide();
+  switchPanel("MT");
   var dbDictKnown = DB.load('dictKnown');
   if (dbDictKnown !== undefined)
     dictKnown = dbDictKnown;
   $("#xbox").bind("keyup click focus", function() {
     cursorMove(this);
   });
+//  console.log("doMT()");
+  doMT();
 }
 
 function forget() {
@@ -155,6 +158,10 @@ function switchDict(name) {
   dictHit   = dictHitMap[name];
   dictKnown = dictKnownMap[name];
   dictObj   = dictObjMap[name];
+  if (name.indexOf("e")>=0) 
+    $('#language1').html("English");
+  if (name.indexOf("c")>=0)
+    $('#language1').html("中文");
 }
 
 function switchPanel(name) {
@@ -167,8 +174,6 @@ function switchPanel(name) {
 function normalize(e) {
   return e.replace("'", '_').toLowerCase();
 }
-
-// var candidates = "";
 
 function mt(text) {
   var toText = "";
@@ -201,7 +206,6 @@ function line_mt(str) { // x2y : translate from x language into y language
   var si = 0;
   while (m = re.exec(str)) {
     var ex=m[1], x = m[2], yi=m[3];
-//    console.log("m[0]=", m[0], "m[1]=", m[1]);
     var lx=x.toLowerCase();
     var y = dictHit[x];
     toStr += str.substring(si, re.lastIndex-ex.length);
@@ -238,7 +242,6 @@ function cursorMove(element) {
   var m = text.substring(i).match(/(([=\s])([^=\d\s]+)(\d*))/);
   if (m !== null) {
     var op=m[2], x = m[3], lx=x.toLowerCase();
-    console.log('pos='+pos+' x='+x);
     var candidates = null;
     if (op === '=') {
       candidates = dictObj[lx];
@@ -263,27 +266,3 @@ window.onbeforeunload = function(){
 </script>
 </body>
 </html>
-
-<!--
-英漢翻譯測試文章
-
-The snow glows white on the mountain tonight.
-Not a footprint to be seen.
-A kingdom of isolation, and it looks like I'm the Queen.
-The wind is howling like this swirling storm inside.
-Couldn't keep it in; Heaven knows I've tried.
-
-Don't let them in, don't let them see.
-Be the good girl you always have to be.
-Conceal, don't feel, don't let them know.
-Well now they know.
-
-Let it go, let it go.
-Can't hold it back any more.
-Let it go, let it go.
-Turn away and slam the door.
-I don't care.
-What they're going to say.
-Let the storm rage on, the cold never bothered me anyway.
-
--->
