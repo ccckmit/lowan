@@ -104,12 +104,24 @@ klama : $x_1$ 移动到目的地 $x_2$, 从$x_3$出发, 经过路径$x_4$ ,使�
 var e2eGismu = {}
 
 function e2eGismuBuild() {
+  for (var l in l2e) {
+    var e = l2e[l];
+    if (l2eGismu[l] !== null)
+      e2eGismu[e] = l2eGismu[l];
+  }
+  for (var e in e2l) {
+    var l = e2l[e];
+    if (l2eGismu[l] !== null)
+      e2eGismu[e] = l2eGismu[l];
+  }
+/*
   for (var l in l2eGismu) {
     if (l2e[l] !== null) {
       var e = l2e[l];
       e2eGismu[e] = l2eGismu[l];
     }
   }
+*/  
 }
 
 var xbox, ybox, dict, knowWords, gismuDict;

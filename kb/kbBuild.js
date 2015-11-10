@@ -10,68 +10,67 @@ function std(s) {
   return s.trim().replace(/"/g, '＂').replace(/\\/g, '\\\\');
 }
   
-function xml2json(xmlFile, x2lFile, l2xFile, lFile, gismuFile) {
+function xml2json(path) {
   var saxStream = require("sax").createStream(strict);
-  var x2lStream = fs.createWriteStream(x2lFile),
-      l2xStream = fs.createWriteStream(l2xFile),
-      lStream = fs.createWriteStream(lFile),
-      gStream = fs.createWriteStream(gismuFile);
-  x2lStream.write("{\n");
-  l2xStream.write("{\n");
-  lStream.write("{\n");
-  gStream.write("{\n");
+  var hitStream = fs.createWriteStream(path+".hit.json"),
+      objStream = fs.createWriteStream(path+".obj.json");
+  hitStream.write("{\n");
+  objStream.write("{\n");
 
-  var word = null, type = null;
-  var tags = [];
+  var obj = {}, hits=[], tags=[];
   
   saxStream.on("opentag", function (node) {
     tags.push(node.name);
 //    c.log("node.name=%s", node.name);
     if (node.name === "valsi") {
-      word = std(node.attributes.word);
-      type = std(node.attributes.type);
-      lStream.write(util.format('"%s":{type:"%s" ', word, type))
+      obj = { word:std(node.attributes.word), type:std(node.attributes.type) };
+      hits = [];
     }
-    if (node.name === "nlword") {
-      var w = std(node.attributes.word);
-      var v = std(node.attributes.valsi);
-      x2lStream.write(util.format('"%s":"%s",\n', w, v));
-      l2xStream.write(util.format('"%s":"%s",\n', v, w));
+    if (node.name==="glossword") {
+      hits.push(std(node.attributes.word));
     }
   })
 
   saxStream.on("text", function (text) {
     var tag = tags[tags.length-1];
     if (tag==="selmaho") {
-      lStream.write('selmaho:"'+text+'" }\n');
+      obj.selmaho = std(text);
     }
-    if (type ==="gismu" && tag==="definition") {
-      gStream.write(util.format('%s:"%s",\n', word, std(text)));
+    if (tag==="definition") {
+//      obj !== null && obj.type ==="gismu" && 
+      obj.def = std(text);
     }
   })
   
-  saxStream.on("closetag", function (node) {
-    if (node.name === "valsi") {
-      word = null;
-      type = null;
+  saxStream.on("closetag", function (tag) {
+//    c.log("tag=%s", tag);
+    if (tag === "valsi") {
+      objStream.write(util.format('"%s":%j,\n', obj.word, obj));
+      hitStream.write(util.format('"%s":%j,\n', obj.word, hits));
+//      c.log(util.format('"%s":%j,', obj.word, obj));
+      obj = null; hits = null;
     }
     tags.pop();
   })
   
   saxStream.on("end", function () {
-    x2lStream.write('"":""}\n');
-    l2xStream.write('"":""}\n');
-    lStream.write('"":""}\n');
-    gStream.write('"":""}\n');
-    x2lStream.end();
-    l2xStream.end();
-    lStream.end();
-    gStream.end();
+    objStream.end('"":null}\n');
+    hitStream.end('"":null}\n');
   })
 
-  fs.createReadStream(xmlFile)
-    .pipe(saxStream)
+  fs.createReadStream(path+".xml").pipe(saxStream);
 }
 
-xml2json("../dictionary/xml-export_english.html", "e2l.json", "l2e.json", "le.json", "l2e_gismu.json");
-xml2json("../dictionary/xml-export_chinese.html", "c2l.json", "l2c.json", "lc.json", "l2c_gismu.json");
+xml2json("../dictionary/l2e");
+xml2json("../dictionary/l2c");
+
+/*    
+    if (node.name === "nlword") {
+      var w = std(node.attributes.word);
+      var v = std(node.attributes.valsi);
+      x2lStream.write(util.format('"%s":"%s",\n', w, v));
+      l2xStream.write(util.format('"%s":"%s",\n', v, w));
+    }
+*/    
+//      gStream.write(util.format('%s:"%s",\n', word, std(text)));
+//    gStream = fs.createWriteStream(gismuFile);
